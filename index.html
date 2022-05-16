@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container"></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+
+
+<script type="x-shader/x-fragment" id="fragmentShader">
+
+  varying float vStripes;
+  varying float vOpacity;
+
+  void main() {
+      gl_FragColor = vec4(vec3(vStripes * 15.), vOpacity);
+  }
+
+</script>
+
+<script type="x-shader/x-vertex" id="vertexShader">
+
+  #define PI 3.14159265359
+
+  uniform float u_time;
+  uniform float u_height;
+  uniform float u_density;
+  uniform float u_curl;
+  uniform vec2 u_wind;
+  uniform float u_mouse_delta;
+
+  varying float vStripes;
+  varying float vOpacity;
+
+  vec2 random2(vec2 p) {
+    return fract(sin(vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3))))*43758.5453);
+  }
+
+  float voronoi(vec2 _uv, float time){
+    vec2 i_uv = floor(_uv);
+    vec2 f_uv = fract(_uv);
+    float min_dist = 2.;
+    for (int j = -1; j <= 1; j++) {
+      for (int i = -1; i <= 1; i++) {
+        vec2 tile_offset = vec2(float(i), float(j));
+        vec2 cell_center = .5 + .5 * sin(time * .5 + PI * 2. * random2(i_uv + tile_offset));
+        float dist = length(tile_offset + cell_center - f_uv);
+        min_dist = min(min_dist, dist);
+      }
+    }
+    return pow(min_dist, 2.);
+  }
+
+  mat2 rotate2d(float angle) {
+    return mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
+  }
+
+  float cubic_pulse_shape(float center, float width, float x) {
+    x = abs(x - center);
+    if (x > width) return 0.;
+    x /= width;
+    return 1. - x * x * (3. - 2. * x);
+  }
+
+  float cone_shape(float x) {
+    return .5 * cos(x * 3.1 + 2.6) + .5 + exp(-12. * x);
+  }
+
+  void main() {
+    vec3 pos = position;
+    float y_factor = uv.x;
+
+    // Less visibile on right and back
+    float vertical_transparency = pow(3. * y_factor * (1. - y_factor), 2.5);
+    float back_transparency = pow(pos.x + 1., 2.) * pow(pos.z + 1., 2.);
+    vOpacity = vertical_transparency * back_transparency;
+
+    // Spiral stuuf over the cyllinder
+    vec2 voronoi_point = vec2(atan(pos.x, pos.z) - pos.y * u_curl, pos.y - u_time);
+    float bumps = voronoi(u_density * voronoi_point, u_time);
+    vec3 pos_no_bump = pos;
+    pos -= (normal * .2 * bumps);
+    vStripes = length(pos_no_bump - pos);
+
+    // Shaping the cyllinder
+    float cone = cone_shape(y_factor);
+    pos.x *= cone;
+    pos.z *= cone;
+    pos.y *= u_height;
+
+    // Add slight constant rotation for central part
+    vec2 wind = vec2(.04, 0.);
+    wind = rotate2d(u_time * 2.) * wind;
+    pos += (vec3(wind.x, 0., wind.y) * (1. - cone));
+
+    // Make the central part to follow the mouse
+    wind += u_wind;
+    pos += vec3(wind.x, 0., wind.y) * cubic_pulse_shape(.35, .8, y_factor);
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
+  }
+</script>
+</html>
