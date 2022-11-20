@@ -3,14 +3,14 @@ lockfileVersion: 5.4
 specifiers:
   '@elonehoo/eslint-config': 2.0.0
   eslint: 8.23.0
-  pnpm: 7.11.0
+  pnpm: 7.16.1
   typescript: 4.8.3
   vite: 3.1.0
 
 devDependencies:
   '@elonehoo/eslint-config': 2.0.0_itqs5654cmlnjraw6gjzqacppi
   eslint: 8.23.0
-  pnpm: 7.11.0
+  pnpm: 7.16.1
   typescript: 4.8.3
   vite: 3.1.0
 
@@ -2095,8 +2095,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /pnpm/7.11.0:
-    resolution: {integrity: sha512-cxh4TfCE8L4ZbLBN72kTGKTYP7X08nrIzoQ2rQCKihAcIHAdNIgsk4bEJyE1xHjE+bNJt9skwr7aJv3LpvUawQ==}
+  /pnpm/7.16.1:
+    resolution: {integrity: sha512-vtAw/kJ+Slm/XdLvd3zbSA8FKBgetrk+1KQFDnyvPP0q2Pjc1f2HsA7idYs9MJewYi4o03cjyZhAdqrCcjknsw==}
     engines: {node: '>=14.6'}
     hasBin: true
     dev: true
