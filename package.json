@@ -14,7 +14,7 @@
     "@elonehoo/eslint-config": "2.0.0",
     "eslint": "8.37.0",
     "pnpm": "7.30.5",
-    "typescript": "4.9.5",
+    "typescript": "5.0.4",
     "vite": "4.2.1"
   }
 }
