@@ -2,7 +2,7 @@
   "name": "interactive-tornado",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@7.32.2",
+  "packageManager": "pnpm@8.5.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,7 +13,7 @@
   "devDependencies": {
     "@elonehoo/eslint-config": "2.0.0",
     "eslint": "8.39.0",
-    "pnpm": "7.32.2",
+    "pnpm": "8.5.1",
     "typescript": "5.0.4",
     "vite": "4.3.1"
   }
