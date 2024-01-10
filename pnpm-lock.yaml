@@ -12,14 +12,14 @@ devDependencies:
     specifier: 8.56.0
     version: 8.56.0
   pnpm:
-    specifier: 8.12.1
-    version: 8.12.1
+    specifier: 8.14.0
+    version: 8.14.0
   typescript:
     specifier: 5.3.3
     version: 5.3.3
   vite:
-    specifier: 5.0.10
-    version: 5.0.10
+    specifier: 5.0.11
+    version: 5.0.11
 
 packages:
 
@@ -2237,8 +2237,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /pnpm@8.12.1:
-    resolution: {integrity: sha512-ZwXqGWattlhwU+bP5v3cN3+BBmIo2vc2xEkAEvRPL/G/DHE7uPMUX84OPvZpx8FfGaWawVeDiVHyNMF7gcplXQ==}
+  /pnpm@8.14.0:
+    resolution: {integrity: sha512-XUv5ezSfrxpRMYqhuoh+mdnDbiA9vLVZOKkf3dJFQkbLAHI9ZkL1TUY6D1KicB2t+N4AKjf8YTyc3JTtVnXdzg==}
     engines: {node: '>=16.14'}
     hasBin: true
     dev: true
@@ -2625,8 +2625,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite@5.0.10:
-    resolution: {integrity: sha512-2P8J7WWgmc355HUMlFrwofacvr98DAjoE52BfdbwQtyLH06XKwaL/FMnmKM2crF0iX4MpmMKoDlNCB1ok7zHCw==}
+  /vite@5.0.11:
+    resolution: {integrity: sha512-XBMnDjZcNAw/G1gEiskiM1v6yzM4GE5aMGvhWTlHAYYhxb7S3/V1s3m2LDHa8Vh6yIWYYB0iJwsEaS523c4oYA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
